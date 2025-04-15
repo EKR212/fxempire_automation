@@ -1,3 +1,6 @@
+//import handleCaptchaIfPresent from handleCaptchaIfPresent
+//let handleCaptchaIfPresent = require('.\helpers\helpfunc.js')
+
 describe('FX Empire Login Test', () => {
   beforeEach(() => {
     cy.visit('https://www.fxempire.com/')
@@ -34,6 +37,7 @@ describe('FX Empire Login Test', () => {
   it('should display error for invalid email', () => {
     // Input invalid credentials
     cy.get('[data-cy="login-email-input"]').type('incorect email format') 
+    cy.get('[data-cy="login-password-input"]').click()
 
     // Verify that an error message is shown
     cy.contains('Please enter your email address in format: name@example.com')
