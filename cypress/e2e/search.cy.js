@@ -1,29 +1,25 @@
-import {generateRandomText} from '../helpers/utils.js'
+import { goodSearchQuary, noMatchingInstrumentsError, nonExistingSearchQuary, pageURL } from '../helpers/consts.js'
 import {homePage} from '../pages/homePage.js'
 
 describe('Search Functionality', () => {
     beforeEach(() => {
-      cy.visit('https://www.fxempire.com/') // Replace with your website's URL
+      cy.visit(pageURL) 
     })
   
     it('should return relevant results when a search term is entered', () => {
-        let searchQuary = 'GOLD'
-
-        homePage.typeInSearch(searchQuary)
+        homePage.typeInSearch(goodSearchQuary) 
         homePage.getSearchResults() 
 
         // Check that the search results are visible and contain the search term
-        return cy.get('@searchResults').should('be.visible').and('contain.text', searchQuary)
+       cy.get('@searchResults').should('be.visible').and('contain.text', goodSearchQuary)
     })
 
     it('should return "No matching instruments"', () => {
-        let searchQuary = generateRandomText()
-
-        homePage.typeInSearch(searchQuary)
+        homePage.typeInSearch(nonExistingSearchQuary)
         homePage.getSearchResults() 
 
         // Check that the search results are visible and contain the search term
-        cy.get('@searchResults').should('be.visible').and('contain.text', "No matching instruments")
+        cy.get('@searchResults').should('be.visible').and('contain.text', noMatchingInstrumentsError)
     })
 
   })

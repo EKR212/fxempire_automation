@@ -1,9 +1,12 @@
 class LoginPage {
     constructor() {
       this.selectors = {
+        loginMode: '[mode="login"]',
+        passwordInputBar: '[data-cy="login-password-input"]',
         emailInput: '[data-cy="login-email-input"]',
         passwordInput: '[data-cy="login-password-input"]',
         submitButton: '[data-cy="login-submit-button"]',
+        errorMessageEmailPaasswordNotMatch : '[data-cy="email-password-not-match"]'
       }
     }
   
