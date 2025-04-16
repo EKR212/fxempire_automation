@@ -1,4 +1,5 @@
-import {generateRandomText} from '../helpers/utils.js';
+import {generateRandomText} from '../helpers/utils.js'
+import {homePage} from '../pages/homePage.js'
 
 describe('Search Functionality', () => {
     beforeEach(() => {
@@ -7,23 +8,19 @@ describe('Search Functionality', () => {
   
     it('should return relevant results when a search term is entered', () => {
         let searchQuary = 'GOLD'
-      // Locate the search input and type a query
-      cy.get('[data-name="main search"]').type(searchQuary)
-  
-        // Use the class selector for the search results
-        cy.get('.sc-9d6df5b3-0.jJiqfr').as('searchResults')
+
+        homePage.typeInSearch(searchQuary)
+        homePage.getSearchResults() 
 
         // Check that the search results are visible and contain the search term
-        cy.get('@searchResults').should('be.visible').and('contain.text', searchQuary)
+        return cy.get('@searchResults').should('be.visible').and('contain.text', searchQuary)
     })
 
     it('should return "No matching instruments"', () => {
         let searchQuary = generateRandomText()
-      // Locate the search input and type a query
-      cy.get('[data-name="main search"]').type(searchQuary)
-  
-        // Use the class selector for the search results
-        cy.get('.sc-9d6df5b3-0.jJiqfr').as('searchResults')
+
+        homePage.typeInSearch(searchQuary)
+        homePage.getSearchResults() 
 
         // Check that the search results are visible and contain the search term
         cy.get('@searchResults').should('be.visible').and('contain.text', "No matching instruments")

@@ -1,9 +1,11 @@
 const { skipTestIfRecaptchaExists } = require("../helpers/utils")
+import {homePage} from '../pages/homePage.js'
+import { loginPage } from '../pages/loginPage.js'
 
 describe('FX Empire Login Test', () => {
   beforeEach(() => {
     cy.visit('https://www.fxempire.com/')
-    cy.get('[data-cy="user-login-button"]').click() // Open the login menu
+    homePage.openLoginModal()
   })
 
   it('should open the login form', () => {
@@ -11,23 +13,11 @@ describe('FX Empire Login Test', () => {
   })
 
   it('should log in with valid credentials', () => {
-    // Input valid credentials
-    cy.get('[data-cy="login-email-input"]').type('einavkr212@gmail.com') 
-    cy.get('[data-cy="login-password-input"]').type('testPassword')  
-
-    // Submit the form
-    cy.get('[data-cy="login-submit-button"]').click()
-
-    // Check if the login was successful
+    loginPage.login('einavkr212@gmail.com', 'testPassword')
   })
 
   it('should display error for invalid credentials', () => {
-    // Input invalid credentials
-    cy.get('[data-cy="login-email-input"]').type('incorectEmail@gmail.com') 
-    cy.get('[data-cy="login-password-input"]').type('incorectPassword')  
-
-    // Submit the form
-    cy.get('[data-cy="login-submit-button"]').click()
+    loginPage.login('incorectEmail@gmail.com', 'incorectPassword')
     skipTestIfRecaptchaExists()
 
     // Verify that an error message is shown
@@ -35,8 +25,7 @@ describe('FX Empire Login Test', () => {
   })
 
   it('should display error for invalid email', () => {
-    // Input invalid credentials
-    cy.get('[data-cy="login-email-input"]').type('incorect email format') 
+    loginPage.typeEmail('incorect email format')
     cy.get('[data-cy="login-password-input"]').click()
 
     // Verify that an error message is shown
