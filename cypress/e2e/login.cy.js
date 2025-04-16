@@ -1,5 +1,4 @@
-//import handleCaptchaIfPresent from handleCaptchaIfPresent
-//let handleCaptchaIfPresent = require('.\helpers\helpfunc.js')
+const { skipTestIfRecaptchaExists } = require("../helpers/utils")
 
 describe('FX Empire Login Test', () => {
   beforeEach(() => {
@@ -29,6 +28,7 @@ describe('FX Empire Login Test', () => {
 
     // Submit the form
     cy.get('[data-cy="login-submit-button"]').click()
+    skipTestIfRecaptchaExists()
 
     // Verify that an error message is shown
     cy.get('[data-cy="email-password-not-match"]').should('be.visible') 
