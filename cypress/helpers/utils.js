@@ -6,7 +6,7 @@ export function skipTestIfRecaptchaExists() {
     if (hasCaptcha) {
       throw new Error('❌ CAPTCHA detected — failing test')
     } else {
-      cy.log('✌️No reCAPTCHA detected — continuing test')
+      cy.log('✅ No reCAPTCHA detected — continuing test')
     }
   })
 }
@@ -18,4 +18,12 @@ export function skipTestIfRecaptchaExists() {
       result += chars.charAt(Math.floor(Math.random() * chars.length))
     }
     return result
+  }
+
+  export function loger(condition, goodResponse, Badresponse){
+    if (condition) {
+      cy.log(goodResponse)
+    } else {
+      cy.log(Badresponse)
+    }
   }

@@ -3,7 +3,8 @@ class HomePage {
       this.selectors = {
         searchBar: '[data-name="main search"]',
         searchResults: '.sc-9d6df5b3-0.jJiqfr',
-        loginButton: '[data-cy="user-login-button"]'
+        loginButton: '[data-cy="user-login-button"]',
+        latestArticles: '[data-name^="hp_article_"] span'
       }
     }
   
@@ -20,6 +21,21 @@ class HomePage {
     openLoginModal() {
         cy.get(this.selectors.loginButton).click()
     }
+
+    // Get homepage article titles using data-name pattern
+    GetArticleTitles(){
+        return cy
+        .get(this.selectors.latestArticles, { timeout: 10000 }) // wait for articles
+        .should('exist')
+        .then($spans => {
+          const titles = [...$spans]
+            .map(el => el.innerText.replace(/\s+/g, ' ').trim()) // normalize spaces
+            .filter(Boolean)
+    
+          return titles
+        })
+    }
+
   
   }
   
