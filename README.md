@@ -126,7 +126,7 @@ To ensure robustness and reduce flakiness:
 
 **Why it's better**: Ensures synchronization between API data and UI, reducing false negatives.
 
-- **Article count discrepancy**: The API is expected to return at least 5 articles, but currently only 4 articles are rendered on the homepage UI, which causes the test to log a warning.
+**Article count discrepancy**: The API is expected to return at least 5 articles, but currently only 4 articles are rendered on the homepage UI, which causes the test to log a warning.
 
 
 ---
