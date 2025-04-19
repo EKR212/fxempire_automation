@@ -182,10 +182,3 @@ Custom logging utility to help visualize test result steps.
   ```bash
   npx cypress open
   ```
-
----
-
-
-
-
-   
