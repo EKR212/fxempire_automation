@@ -174,16 +174,11 @@ Custom logging utility to help visualize test result steps.
 - npm installed
 
 ### Installation
-  bash
+  ```bash
   npm install
+  ```
 
 ### Run tests in interactive mode
-  bash
+  ```bash
   npx cypress open
-
----
-
-
-
-
-   
+  ```
